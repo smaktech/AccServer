@@ -1,0 +1,10 @@
+{
+  "files": {
+    "main.js": "/AccServer/static/js/main.7265f521.js",
+    "index.html": "/AccServer/index.html",
+    "main.7265f521.js.map": "/AccServer/static/js/main.7265f521.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.7265f521.js"
+  ]
+}
