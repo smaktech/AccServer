@@ -1,0 +1,47 @@
+{
+  "name": "cyberflow",
+  "homepage": "https://smaktech.github.io/AccServer",
+  "version": "1.0.0",
+  "description": "Login System for Cyber Flow Assignment",
+  "main": "index.js",
+  "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index",
+    "dev": "nodemon index"
+  },
+  "engines": {
+    "node": "16.17.0",
+    "npm": "8.15.0"
+  },
+  "author": "Sidharth Choudhary",
+  "license": "ISC",
+  "devDependencies": {
+    "gh-pages": "^5.0.0",
+    "nodemon": "^2.0.19"
+  },
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.19.0",
+    "brcypt": "^1.0.1",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "decompress": "^4.2.1",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "joi": "^17.4.2",
+    "jsonwebtoken": "^9.0.0",
+    "mongodb": "^4.1.1",
+    "mongoose": "^6.0.5",
+    "nodemailer": "^6.6.5",
+    "nodemailer-express-handlebars": "^6.1.0",
+    "otplib": "^12.0.1",
+    "referral-codes": "^1.0.2",
+    "stripe": "^8.194.0",
+    "swagger": "^0.0.1",
+    "swagger-jsdoc": "^6.1.0",
+    "swagger-ui-express": "^4.1.6",
+    "yamljs": "^0.3.0"
+  }
+}

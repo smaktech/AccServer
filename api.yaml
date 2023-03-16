@@ -1,0 +1,3026 @@
+swagger: "2.0.0"
+info:
+  title: Academy APP
+  description: Api Documentation for Academia Cyber Flow
+  version: 1.0.0
+  contact:
+    email: choudharysidharth082000@gmail.com
+  servers:
+    - url: "http://localhost:3000"
+      description: "Local Server Running"
+    - url: "https://testcyberflow.herokuapp.com"
+      description: "Main Server"
+
+schemes: [http, https]
+
+paths:
+  /v1/auth/socialLogin:
+    post:
+      tags:
+        - name: Auth
+      summary: Social Login
+      description: lorem
+      parameters:
+        - in: body
+          name: auth
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+              school:
+                type: string
+              phoneNumber:
+                type: string
+              name:
+                type: string
+              loginType:
+                type: string
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+  /v1/auth/decryptJWT:
+    post:
+      tags:
+        - name: JWT
+      summary: Decrypt JWT
+      description: lorem
+      parameters:
+        - in: body
+          name: JWT
+          schema:
+            type: object
+            properties:
+              accessToken:
+                type: string
+      responses:
+        200:
+          description: OK
+  /v1/auth/loginAdmin:
+    post:
+      tags:
+        - name: Admin Auth
+      summary: Login System Admin Test
+      description: This api will be for the login of the admin in the test app
+      consumes: application/json
+      produces: application/json
+      parameters:
+        - in: body
+          name: User
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+              password:
+                type: string
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+
+  /v1/auth/login:
+    post:
+      tags:
+        - name: Auth
+      summary: Login System Admin Test
+      description: This api will be for the login of the admin in the test app
+      consumes: application/json
+      produces: application/json
+      parameters:
+        - in: body
+          name: User
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+              password:
+                type: string
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+  /v1/auth/updateNameUser/{userID}:
+    put:
+      tags:
+        - name: Auth
+      summary: Update Name
+      description: Update NAme of the user
+      parameters:
+        - name: userID
+          in: path
+          type: string
+          required: true
+        - in: body
+          name: data
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+
+      responses:
+        200:
+          description: OK
+  /v1/auth/updateNameAdmin/{userID}:
+    put:
+      tags:
+        - name: Admin Auth
+      summary: Update Name
+      description: Update NAme of the user
+      parameters:
+        - name: userID
+          in: path
+          type: string
+          required: true
+        - in: body
+          name: data
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+
+      responses:
+        200:
+          description: OK
+  /v1/auth/getUsersByFilter/{offset}/{limit}:
+    post:
+      tags:
+        - name: User
+      summary: Filters Users
+      description: APi will get the filters in the user
+      consumes: multipart/form-data
+      produces: application/json
+      parameters:
+        - name: offset
+          in: path
+          type: string
+          required: true
+        - name: limit
+          in: path
+          type: string
+          required: true
+        - in: body
+          name: data
+          schema:
+            type: object
+            properties:
+              school:
+                type: string
+              status:
+                type: boolean
+              from:
+                type: date
+              to:
+                type: date
+
+      responses:
+        200:
+          description: OK
+
+  /v1/auth/updatePassword:
+    post:
+      tags:
+        - name: Auth
+      summary: Forget password
+      description: This api will be used to Update the password in the Database
+      consumes: application/json
+      produces: application/json
+      parameters:
+        - in: body
+          name: ForgetPassword
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+              newPassword:
+                type: string
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+  /v1/auth/updatePasswordUser:
+    post:
+      tags:
+        - name: Auth
+      summary: Update Password
+      description: This api will be used to Update the password in the Database
+      consumes: application/json
+      produces: application/json
+      parameters:
+        - in: body
+          name: ForgetPassword
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+              password:
+                type: string
+              newPassword:
+                type: string
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+  /v1/auth/addProfileUser/{userID}:
+    put:
+      tags:
+        - name: Auth
+      summary: Update Profile
+      description: Updates the profile image
+      consumes: multipart/form-data
+      produces: application/json
+      parameters:
+        - name: userID
+          in: path
+          type: string
+          required: true
+        - name: imageProfile
+          in: formData
+          type: file
+          required: true
+      responses:
+        200:
+          description: OK
+  /v1/auth/addProfileAdmin/{userID}:
+    put:
+      tags:
+        - name: Admin Auth
+      summary: Update Profile
+      description: Updates the profile image
+      consumes: multipart/form-data
+      produces: application/json
+      parameters:
+        - name: userID
+          in: path
+          type: string
+          required: true
+        - name: imageProfile
+          in: formData
+          type: file
+          required: true
+      responses:
+        200:
+          description: OK
+
+  /v1/auth/updatePasswordAdmin:
+    post:
+      tags:
+        - name: Admin Auth
+      summary: Update Password
+      description: This api will be used to Update the password in the Database
+      consumes: application/json
+      produces: application/json
+      parameters:
+        - in: body
+          name: ForgetPassword
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+              password:
+                type: string
+              newPassword:
+                type: string
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+  /v1/auth/getUserByID/{userID}:
+    get:
+      tags:
+        - name: User
+      summary: Users By ID
+      description: GEtting users by there ID
+      parameters:
+        - name: userID
+          in: path
+          type: string
+          required: true
+      responses:
+        200:
+          description: OK
+  /v1/auth/getAllUsers:
+    get:
+      tags:
+        - name: User
+      summary: Getting all Users
+      description: APi will get all the users in the database
+      parameters:
+        - name: page
+          in: query
+          type: string
+        - name: limit
+          in: query
+          type: string
+        - name: page
+          in: query
+          type: string
+        - name: searchString
+          in: query
+          type: string
+        - name: isActive
+          in: query
+          type: boolean
+        - name: startDate
+          in: query
+          type: string
+        - name: endDate
+          in: query
+          type: string
+        - name: sortByDate
+          in: query
+          type: string
+          enum: [asc, dsc]
+      responses:
+        200:
+          description: OK
+  /v1/auth/changeUserStatus/{userID}:
+    post:
+      tags:
+        - name: Admin
+      summary: Change user Status
+      consumes: multipart/form-data
+      produces: application/json
+      parameters:
+        - name: userID
+          in: path
+          type: string
+          required: true
+        - name: isActive
+          in: formData
+          type: boolean
+          required: true
+      responses:
+        200:
+          description: OK
+  /v1/auth/deleteUser/{userID}:
+    delete:
+      tags:
+        - name: Admin
+      summary: Delete User
+      description: Delete user by a particular id
+      parameters:
+        - name: userID
+          in: path
+          type: string
+          required: true
+      responses:
+        200:
+          description: OK
+
+  /v1/auth/verifyPassword/{email}:
+    post:
+      tags:
+        - name: Auth
+      summary: Verify Password
+      description: lorem
+      parameters:
+        - name: email
+          in: path
+          type: string
+          required: true
+        - name: verifyPassword
+          in: body
+          schema:
+            type: object
+            properties:
+              otp:
+                type: string
+      responses:
+        200:
+          description: OK
+
+  #### ------------- Course Route ------------- ####
+  /v1/course/filterCourse:
+    get:
+      tags:
+        - name: Course
+      summary: Get All Courses By filter
+      description: APi to get all the Subjects by filter
+      parameters:
+        - name: searchString
+          in: query
+          type: string
+        - name: status
+          in: query
+          type: string
+          enum: [active, inactive]
+        - name: boardID
+          in: query
+          type: string
+        - name: subBoardID
+          in: query
+          type: string
+        - name: subjectID
+          in: query
+          type: string
+        - name: classesID
+          in: query
+          type: string
+        - name: startDate
+          in: query
+          type: string
+        - name: endDate
+          in: query
+          type: string
+        - name: page
+          in: query
+          type: string
+        - name: limit
+          in: query
+          type: string
+        - name: sortByDate
+          in: query
+          type: string
+          enum: [asc, dsc]
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+  /v1/course/getCourseById/{courseID}:
+    get:
+      tags:
+        - name: Course
+      summary: Get All Courses By courseID
+      description: APi to get all the Courses
+      parameters:
+        - name: courseID
+          in: path
+          type: string
+          required: true
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+
+  /v1/course/createCourse:
+    post:
+      tags:
+        - name: Course
+      summary: Create Course
+      description: Api to Create Course
+      consumes: application/x-www-form-urlencoding
+      produces: application/json
+      parameters:
+        - name: name
+          in: formData
+          type: string
+        - name: boardID
+          in: formData
+          type: string
+        - name: subBoardID
+          in: formData
+          type: string
+        - name: classesID
+          in: formData
+          type: string
+        - name: subjectID
+          in: formData
+          type: string
+        - name: topicIDs
+          in: formData
+          type: array
+          items:
+            type: string
+        - name: description
+          in: formData
+          type: string
+        - name: status
+          in: formData
+          type: string
+        - name: image
+          in: formData
+          type: file
+
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+  /v1/course/editCourse/{courseID}:
+    patch:
+      tags:
+        - name: Course
+      summary: Edit the Course
+      description: Api that will edit the Course
+      consumes: multipart/form-data
+      produces: application/json
+      parameters:
+        - name: courseID
+          in: path
+          type: string
+          required: true
+        - name: course
+          in: body
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+              boardID:
+                type: string
+              classesID:
+                type: string
+              subjectID:
+                type: string
+              topicIDs:
+                type: array
+                items:
+                  type: string
+              description:
+                type: string
+              status:
+                type: string
+                enum: [active, inactive]
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+  /v1/course/addTopicToCourse/{courseID}:
+    patch:
+      tags:
+        - name: Course
+      summary: Add topic to the course
+      description: Api that will add topic to the course
+      consumes: application/json
+      produces: application/json
+      parameters:
+        - name: courseID
+          in: path
+          type: string
+          required: true
+        - name: course
+          in: body
+          schema:
+            type: object
+            properties:
+              topicIDs:
+                type: array
+                items:
+                  type: string
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+  /v1/course/removeTopicFromCourse/{courseID}:
+    patch:
+      tags:
+        - name: Course
+      summary: remove topic from the course
+      description: Api that will remove topic from the course
+      consumes: application/json
+      produces: application/json
+      parameters:
+        - name: courseID
+          in: path
+          type: string
+          required: true
+        - name: topicID
+          in: query
+          type: string
+          required: true
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+
+  /v1/course/deleteCourseById/{courseId}:
+    delete:
+      tags:
+        - name: Course
+      summary: Delete Course by its id
+      description: APi to delete course by id
+      parameters:
+        - name: courseId
+          in: path
+          type: string
+          required: true
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+  #### ------------- Subject Route ------------- ####
+  /v1/subject/filterSubject:
+    get:
+      tags:
+        - name: Subject
+      summary: Get All Subjects By filter
+      description: APi to get all the Subjects by filter
+      parameters:
+        - name: searchString
+          in: query
+          type: string
+        - name: status
+          in: query
+          type: string
+          enum: [active, inactive]
+        - name: startDate
+          in: query
+          type: string
+        - name: endDate
+          in: query
+          type: string
+        - name: page
+          in: query
+          type: string
+        - name: limit
+          in: query
+          type: string
+        - name: sortByDate
+          in: query
+          type: string
+          enum: [asc, dsc]
+
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+  /v1/subject/getSubjectById/{subjectID}:
+    get:
+      tags:
+        - name: Subject
+      summary: Get All subjects By subjectID
+      description: APi to get all the Subjects
+      parameters:
+        - name: subjectID
+          in: path
+          type: string
+          required: true
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+
+  /v1/subject/createSubject:
+    post:
+      tags:
+        - name: Subject
+      summary: Create Subject
+      description: Api to Create Subject
+      consumes: multipart/form-data
+      produces: application/json
+      parameters:
+        - name: name
+          in: formData
+          type: string
+          required: true
+        - name: image
+          in: formData
+          type: file
+        - name: status
+          in: formData
+          type: string
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+  /v1/Subject/editSubject/{subjectID}:
+    patch:
+      tags:
+        - name: Subject
+      summary: Edit the Subject
+      description: Api that will edit the Subject
+      consumes: application/json
+      produces: application/json
+      parameters:
+        - name: subjectID
+          in: path
+          type: string
+          required: true
+        - name: name
+          in: formData
+          type: string
+        - name: status
+          in: formData
+          type: string
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+  /v1/subject/deleteSubjectById/{subjectId}:
+    delete:
+      tags:
+        - name: Subject
+      summary: Delete Subject by its id
+      description: APi to delete subject by id
+      parameters:
+        - name: subjectId
+          in: path
+          type: string
+          required: true
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+
+  #### ------------- Board Route ------------- ####
+  /v1/board/filterBoard:
+    get:
+      tags:
+        - name: Board
+      summary: Get All Board By filter
+      description: APi to get all the Board by filter
+      parameters:
+        - name: searchString
+          in: query
+          type: string
+        - name: status
+          in: query
+          type: string
+          enum: [active, inactive]
+        - name: startDate
+          in: query
+          type: string
+        - name: endDate
+          in: query
+          type: string
+        - name: page
+          in: query
+          type: string
+        - name: limit
+          in: query
+          type: string
+        - name: sortByDate
+          in: query
+          type: string
+          enum: [asc, dsc]
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+  /v1/board/getBoardById/{boardID}:
+    get:
+      tags:
+        - name: Board
+      summary: Get All boards By boardID
+      description: APi to get all the Boards
+      parameters:
+        - name: boardID
+          in: path
+          type: string
+          required: true
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+
+  /v1/board/createBoard:
+    post:
+      tags:
+        - name: Board
+      summary: Create Board
+      description: Api to Create Board
+      consumes: application/json
+      produces: application/json
+      parameters:
+        - name: name
+          in: formData
+          type: string
+          required: true
+        - name: status
+          in: formData
+          type: string
+          enum: [active, inactive]
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+  /v1/Board/editBoard/{boardID}:
+    patch:
+      tags:
+        - name: Board
+      summary: Edit the Board
+      description: Api that will edit the Board
+      consumes: application/json
+      produces: application/json
+      parameters:
+        - name: boardID
+          in: path
+          type: string
+          required: true
+        - name: name
+          in: formData
+          type: string
+        - name: status
+          in: formData
+          type: string
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+  /v1/board/deleteBoardById/{boardId}:
+    delete:
+      tags:
+        - name: Board
+      summary: Delete Board by its id
+      description: APi to delete board by id
+      parameters:
+        - name: boardId
+          in: path
+          type: string
+          required: true
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+  #### ------------- SubBoard Route ------------- ####
+  /v1/subBoard/filterSubBoard:
+    get:
+      tags:
+        - name: SubBoard
+      summary: Get All SubBoard By filter
+      description: APi to get all the SubBoard by filter
+      parameters:
+        - name: searchString
+          in: query
+          type: string
+        - name: boardID
+          in: query
+          type: string
+        - name: status
+          in: query
+          type: string
+          enum: [active, inactive]
+        - name: startDate
+          in: query
+          type: string
+        - name: endDate
+          in: query
+          type: string
+        - name: page
+          in: query
+          type: string
+        - name: limit
+          in: query
+          type: string
+        - name: sortByDate
+          in: query
+          type: string
+          enum: [asc, dsc]
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+  /v1/subBoard/getSubBoardById/{subBoardID}:
+    get:
+      tags:
+        - name: SubBoard
+      summary: Get All subBoard By subBoardID
+      description: APi to get all the subBoard
+      parameters:
+        - name: subBoardID
+          in: path
+          type: string
+          required: true
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+
+  /v1/subBoard/createSubBoard/{boardID}:
+    post:
+      tags:
+        - name: SubBoard
+      summary: Create subBoard
+      description: Api to Create subBoard
+      consumes: application/json
+      produces: application/json
+      parameters:
+        - name: name
+          in: formData
+          type: string
+          required: true
+        - name: boardID
+          in: path
+          type: string
+          required: true
+        - name: status
+          in: formData
+          type: string
+          enum: [active, inactive]
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+  /v1/subBoard/editSubBoard/{subBoardID}:
+    patch:
+      tags:
+        - name: SubBoard
+      summary: Edit the subBoard
+      description: Api that will edit the subBoard
+      consumes: application/json
+      produces: application/json
+      parameters:
+        - name: subBoardID
+          in: path
+          type: string
+          required: true
+        - name: name
+          in: formData
+          type: string
+        - name: status
+          in: formData
+          type: string
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+  /v1/subBoard/deleteSubBoardById/{subBoardID}:
+    delete:
+      tags:
+        - name: SubBoard
+      summary: Delete SubBoard by its id
+      description: APi to delete SubBoard by id
+      parameters:
+        - name: subBoardID
+          in: path
+          type: string
+          required: true
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+  # #### ------------- Qualification Route ------------- ####
+  #   /v1/qualification/filterQualification:
+  #     get:
+  #       tags:
+  #         - name: Qualification
+  #       summary: Get All Qualification By filter
+  #       description: APi to get all the Qualification by filter
+  #       parameters:
+  #         - name: searchString
+  #           in: query
+  #           type: string
+  #         - name: status
+  #           in: query
+  #           type: string
+  #           enum: [active, inactive]
+  #         - name: startDate
+  #           in: query
+  #           type: string
+  #         - name: endDate
+  #           in: query
+  #           type: string
+  #         - name: page
+  #           in: query
+  #           type: string
+  #         - name: limit
+  #           in: query
+  #           type: string
+  #         - name: sortByDate
+  #           in: query
+  #           type: string
+  #           enum: [asc, dsc]
+  #       responses:
+  #         200:
+  #           description: OK
+  #         400:
+  #           description: Invalid Credentials
+  #         404:
+  #           description: Not Found
+  #         401:
+  #           description: Invalid Credentials
+  #         500:
+  #           description: Internal Server Error
+  #   /v1/qualification/getQualificationById/{qualificationID}:
+  #     get:
+  #       tags:
+  #         - name: Qualification
+  #       summary: Get All qualifications By qualificationID
+  #       description: APi to get all the Qualifications
+  #       parameters:
+  #         - name: qualificationID
+  #           in: path
+  #           type: string
+  #           required: true
+  #       responses:
+  #         200:
+  #           description: OK
+  #         400:
+  #           description: Invalid Credentials
+  #         404:
+  #           description: Not Found
+  #         401:
+  #           description: Invalid Credentials
+  #         500:
+  #           description: Internal Server Error
+
+  #   /v1/qualification/createQualification:
+  #     post:
+  #       tags:
+  #         - name: Qualification
+  #       summary: Create Qualification
+  #       description: Api to Create Qualification
+  #       consumes: application/json
+  #       produces: application/json
+  #       parameters:
+  #         - name: name
+  #           in: formData
+  #           type: string
+  #           required: true
+  #         - name: status
+  #           in: formData
+  #           type: string
+  #           enum: [active, inactive]
+  #       responses:
+  #         200:
+  #           description: OK
+  #         400:
+  #           description: Invalid Credentials
+  #         404:
+  #           description: Not Found
+  #         401:
+  #           description: Invalid Credentials
+  #         500:
+  #           description: Internal Server Error
+  #   /v1/Qualification/editQualification/{qualificationID}:
+  #     patch:
+  #       tags:
+  #         - name: Qualification
+  #       summary: Edit the Qualification
+  #       description: Api that will edit the Qualification
+  #       consumes: application/json
+  #       produces: application/json
+  #       parameters:
+  #         - name: qualificationID
+  #           in: path
+  #           type: string
+  #           required: true
+  #         - name: name
+  #           in: formData
+  #           type: string
+  #         - name: status
+  #           in: formData
+  #           type: string
+  #       responses:
+  #         200:
+  #           description: OK
+  #         400:
+  #           description: Invalid Credentials
+  #         404:
+  #           description: Not Found
+  #         401:
+  #           description: Invalid Credentials
+  #         500:
+  #           description: Internal Server Error
+  #   /v1/qualification/deleteQualificationById/{qualificationId}:
+  #     delete:
+  #       tags:
+  #         - name: Qualification
+  #       summary: Delete Qualification by its id
+  #       description: APi to delete qualification by id
+  #       parameters:
+  #         - name: qualificationId
+  #           in: path
+  #           type: string
+  #           required: true
+  #       responses:
+  #         200:
+  #           description: OK
+  #         400:
+  #           description: Invalid Credentials
+  #         404:
+  #           description: Not Found
+  #         401:
+  #           description: Invalid Credentials
+  #         500:
+  #           description: Internal Server Error
+
+  #### ------------- Classes Route ------------- ####
+  /v1/classes/filterClasses:
+    get:
+      tags:
+        - name: Classes
+      summary: Get All Classes By filter
+      description: APi to get all the Classes by filter
+      parameters:
+        - name: searchString
+          in: query
+          type: string
+        - name: status
+          in: query
+          type: string
+          enum: [active, inactive]
+        - name: startDate
+          in: query
+          type: string
+        - name: endDate
+          in: query
+          type: string
+        - name: page
+          in: query
+          type: string
+        - name: limit
+          in: query
+          type: string
+        - name: sortByDate
+          in: query
+          type: string
+          enum: [asc, dsc]
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+  /v1/classes/getClassesById/{classesID}:
+    get:
+      tags:
+        - name: Classes
+      summary: Get All classes By classesID
+      description: APi to get all the Classes
+      parameters:
+        - name: classesID
+          in: path
+          type: string
+          required: true
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+
+  /v1/classes/createClasses:
+    post:
+      tags:
+        - name: Classes
+      summary: Create Classes
+      description: Api to Create Classes
+      consumes: application/json
+      produces: application/json
+      parameters:
+        - name: name
+          in: formData
+          type: string
+          required: true
+        - name: status
+          in: formData
+          type: string
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+  /v1/classes/editClasses/{classesID}:
+    patch:
+      tags:
+        - name: Classes
+      summary: Edit the Classes
+      description: Api that will edit the Classes
+      consumes: application/json
+      produces: application/json
+      parameters:
+        - name: classesID
+          in: path
+          type: string
+          required: true
+        - name: name
+          in: formData
+          type: string
+        - name: status
+          in: formData
+          type: string
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+  /v1/classes/deleteClassesById/{classesId}:
+    delete:
+      tags:
+        - name: Classes
+      summary: Delete Classes by its id
+      description: APi to delete classes by id
+      parameters:
+        - name: classesId
+          in: path
+          type: string
+          required: true
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+
+  /v1/auth/sendOTP:
+    post:
+      tags:
+        - name: Auth
+      summary: Forgot password
+      description: Sends the otp mail to the User
+      consumes: multipart/form-data
+      produces: application/json
+      parameters:
+        - name: email
+          in: formData
+          type: string
+          required: true
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+  /v1/auth/password-reset/{userID}/{token}:
+    post:
+      tags:
+        - name: Auth
+      summary: Forgot password
+      description: Sends the otp mail to the User
+      consumes: multipart/form-data
+      produces: application/json
+      parameters:
+        - name: userID
+          in: path
+          type: string
+          required: true
+        - name: token
+          in: path
+          type: string
+          required: true
+        - name: newPassword
+          in: formData
+          type: string
+          required: true
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+
+  # /v1/auth/verifyPassword/{email}:
+  #   post:
+  #     tags:
+  #       - name: Auth
+  #     summary: Verify Password
+  #     description: Verifies the otp mail to the User
+  #     consumes:
+  #       multipart/form-data
+  #     produces:
+  #       application/json
+  #     parameters:
+  #       - name: email
+  #         in: path
+  #         type: string
+  #         required: true
+  #       - name: otp
+  #         in: formData
+  #         type: string
+  #         required: true
+  #     responses:
+  #       200:
+  #         description: OK
+  #       400:
+  #         description: Invalid Credentials
+  #       404:
+  #         description: Not Found
+  #       401:
+  #         description: Invalid Credentials
+  #       500:
+  #         description: Internal Server Error
+
+  /v1/auth/signupTest:
+    post:
+      tags:
+        - name: Auth
+      summary: Signup Api
+      description: This will be the signup api for the admin panel user in the test App
+      consumes: application/json
+      produces: application/json
+      parameters:
+        - in: body
+          name: User
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+              email:
+                type: string
+              phoneNumber:
+                type: string
+              school:
+                type: string
+              password:
+                type: string
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+
+  #### ------------- Topic Route ------------- ####
+  /v1/topic/filterTopic:
+    get:
+      tags:
+        - name: Topic
+      summary: Get All Topics By filter
+      description: APi to get all the Topics by filter
+      parameters:
+        - name: searchString
+          in: query
+          type: string
+        - name: status
+          in: query
+          type: string
+          enum: [active, inactive]
+        - name: startDate
+          in: query
+          type: string
+        - name: endDate
+          in: query
+          type: string
+        - name: page
+          in: query
+          type: string
+        - name: limit
+          in: query
+          type: string
+        - name: sortByDate
+          in: query
+          type: string
+          enum: [asc, dsc]
+
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+  /v1/topic/getTopicById/{topicID}:
+    get:
+      tags:
+        - name: Topic
+      summary: Get Al Topic By ID
+      description: API to get a Topic by ID
+      parameters:
+        - name: topicID
+          in: path
+          type: string
+          required: true
+
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+
+  /v1/topic/getCourseTopics/{courseID}:
+    get:
+      tags:
+        - name: Topic
+      summary: Get topic by course ID
+      description: API to Get topic by course ID
+      parameters:
+        - name: courseID
+          in: path
+          type: string
+          required: true
+
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+
+  /v1/topic/createTopic:
+    post:
+      tags:
+        - name: Topic
+      summary: Create Topic
+      description: Api to Create Topic
+      consumes: multipart/form-data
+      produces: application/json
+      parameters:
+        - name: name
+          in: formData
+          type: string
+          required: true
+        - name: description
+          in: formData
+          type: string
+          required: false
+        - name: status
+          in: formData
+          type: string
+          enum: [active, inactive]
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+  /v1/topic/editTopic/{topicID}:
+    patch:
+      tags:
+        - name: Topic
+      summary: Edit Topic
+      description: Api to Edit Topic
+      consumes: multipart/form-data
+      produces: application/json
+      parameters:
+        - name: topicID
+          in: path
+          type: string
+          required: true
+        - name: name
+          in: formData
+          type: string
+        - name: description
+          in: formData
+          type: string
+        - name: status
+          in: formData
+          type: string
+          enum: [active, inactive]
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+  /v1/topic/deleteTopicById/{topicID}:
+    delete:
+      tags:
+        - name: Topic
+      summary: Delete Topic
+      description: Delete Topic by its id
+      parameters:
+        - name: topicID
+          in: path
+          type: string
+          required: true
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+  #### -------------Sub Topic Route ------------- ####
+  /v1/subTopic/filterSubTopic:
+    get:
+      tags:
+        - name: SubTopic
+      summary: Get All SubTopics By filter
+      description: APi to get all the SubTopics by filter
+      parameters:
+        - name: searchString
+          in: query
+          type: string
+        - name: topicID
+          in: query
+          type: string
+        - name: status
+          in: query
+          type: string
+          enum: [active, inactive]
+        - name: startDate
+          in: query
+          type: string
+        - name: endDate
+          in: query
+          type: string
+        - name: page
+          in: query
+          type: string
+        - name: limit
+          in: query
+          type: string
+        - name: sortByDate
+          in: query
+          type: string
+          enum: [asc, dsc]
+
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+  /v1/subTopic/getSubTopicById/{subTopicID}:
+    get:
+      tags:
+        - name: SubTopic
+      summary: Get All SubTopic By ID
+      description: API to get a SubTopic by ID
+      parameters:
+        - name: subTopicID
+          in: path
+          type: string
+          required: true
+
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+
+  /v1/subTopic/createSubTopic/{topicID}:
+    post:
+      tags:
+        - name: SubTopic
+      summary: Create SubTopic
+      description: Api to Create SubTopic
+      consumes: multipart/form-data
+      produces: application/json
+      parameters:
+        - name: topicID
+          in: path
+          type: string
+          required: true
+        - name: name
+          in: formData
+          type: string
+          required: true
+        - name: description
+          in: formData
+          type: string
+          required: true
+        - name: file
+          in: formData
+          type: file
+          required: false
+        - name: status
+          in: formData
+          type: string
+          enum: [active, inactive]
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+  /v1/subTopic/editSubTopic/{subTopicID}:
+    patch:
+      tags:
+        - name: SubTopic
+      summary: Edit SubTopic
+      description: Api to Edit SubTopic
+      consumes: multipart/form-data
+      produces: application/json
+      parameters:
+        - name: subTopicID
+          in: path
+          type: string
+          required: true
+        - name: name
+          in: formData
+          type: string
+        - name: description
+          in: formData
+          type: string
+        - name: file
+          in: formData
+          type: file
+        - name: status
+          in: formData
+          type: string
+          enum: [active, inactive]
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+  /v1/subTopic/deleteSubTopicById/{subTopicID}:
+    delete:
+      tags:
+        - name: SubTopic
+      summary: Delete SubTopic
+      description: Delete SubTopic by its id
+      parameters:
+        - name: subTopicID
+          in: path
+          type: string
+          required: true
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+  # Exam Routes
+
+  /v1/exam/{subTopicID}:
+    post:
+      tags:
+        - name: Exam
+      summary: Upload exam to a specific topic
+      consumes: multipart/form-data
+      produces: application/json
+      parameters:
+        - name: subTopicID
+          in: path
+          type: string
+          required: true
+        - name: name
+          in: formData
+          type: string
+          required: true
+        - name: exam
+          in: formData
+          type: file
+          required: true
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+  /v1/exam/{examID}:
+    patch:
+      tags:
+        - name: Exam
+      summary: edit exam to a specific topic
+      consumes: multipart/form-data
+      produces: application/json
+      parameters:
+        - name: examID
+          in: path
+          type: string
+          required: true
+        - name: name
+          in: formData
+          type: string
+        - name: exam
+          in: formData
+          type: file
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+
+  /v1/exam/postResults:
+    post:
+      tags:
+        - name: Exam
+      summary: create exam result to a specific user for specific exam
+      consumes: application/json
+      produces: application/json
+      parameters:
+        - name: result
+          in: body
+          schema:
+            type: object
+            properties:
+              uID:
+                type: string
+              stID:
+                type: string
+              examID:
+                type: string
+              examData:
+                type: string
+              exerciseData:
+                type: string
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+
+  ## Resource Apis
+  /v1/resource/filterResource:
+    get:
+      tags:
+        - name: Resource
+      summary: Get All Resources By filter
+      description: APi to get all the Resources by filter
+      parameters:
+        - name: searchString
+          in: query
+          type: string
+        - name: status
+          in: query
+          type: string
+          enum: [active, inactive]
+        - name: courseID
+          type: string
+          in: query
+        - name: subjectID
+          type: string
+          in: query
+        - name: startDate
+          in: query
+          type: string
+        - name: endDate
+          in: query
+          type: string
+        - name: page
+          in: query
+          type: string
+        - name: limit
+          in: query
+          type: string
+        - name: sortByDate
+          in: query
+          type: string
+          enum: [asc, dsc]
+
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+  /v1/resource/getResourceById/{resourceID}:
+    get:
+      tags:
+        - name: Resource
+      summary: Get Al Resource By ID
+      description: API to get a Resource by ID
+      parameters:
+        - name: resourceID
+          in: path
+          type: string
+          required: true
+
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+
+  /v1/resource/createResource:
+    post:
+      tags:
+        - name: Resource
+      summary: Create Resource
+      description: Api to Create Resource
+      consumes: multipart/form-data
+      produces: application/json
+      parameters:
+        - name: name
+          in: formData
+          type: string
+          required: true
+        - name: description
+          in: formData
+          type: string
+          required: true
+        - name: linkType
+          in: formData
+          type: string
+          enum: [upload, link]
+          required: true
+        - name: linkString
+          in: formData
+          type: string
+        - name: resourceFile
+          in: formData
+          type: file
+          required: false
+        - name: status
+          in: formData
+          type: string
+          enum: [active, inactive]
+
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+  /v1/resource/editResource/{resourceID}:
+    patch:
+      tags:
+        - name: Resource
+      summary: Edit Resource
+      description: Api to Edit Resource
+      consumes: multipart/form-data
+      produces: application/json
+      parameters:
+        - name: resourceID
+          in: path
+          type: string
+          required: true
+        - name: name
+          in: formData
+          type: string
+        - name: description
+          in: formData
+          type: string
+        - name: linkType
+          in: formData
+          type: string
+          enum: [upload, link]
+        - name: linkString
+          in: formData
+          type: string
+        - name: resourceFile
+          in: formData
+          type: file
+        - name: status
+          in: formData
+          type: string
+          enum: [active, inactive]
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+  /v1/resource/deleteResourceById/{resourceID}:
+    delete:
+      tags:
+        - name: Resource
+      summary: Delete Resource
+      description: Delete Resource by its id
+      parameters:
+        - name: resourceID
+          in: path
+          type: string
+          required: true
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+
+          ## Topic Apis
+
+  ## CMS Apis
+
+  /v1/cms/getCMS:
+    get:
+      tags:
+        - name: CMS
+      summary: Get CMS
+      description: API to get a CMS
+
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+
+  /v1/cms/editTerms/{cmsID}:
+    patch:
+      tags:
+        - name: CMS
+      summary: Edit the CMS
+      description: Api that will edit the CMS
+      consumes: application/json
+      produces: application/json
+      parameters:
+        - name: cmsID
+          in: path
+          type: string
+          required: true
+        - name: termsAndConditions
+          in: formData
+          type: string
+          required: true
+
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+  /v1/cms/editAboutUS/{cmsID}:
+    patch:
+      tags:
+        - name: CMS
+      summary: Edit the CMS
+      description: Api that will edit the CMS
+      consumes: application/json
+      produces: application/json
+      parameters:
+        - name: cmsID
+          in: path
+          type: string
+          required: true
+        - name: aboutUs
+          in: formData
+          type: string
+          required: true
+
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+  /v1/cms/editPolicy/{cmsID}:
+    patch:
+      tags:
+        - name: CMS
+      summary: Edit the CMS
+      description: Api that will edit the CMS
+      consumes: application/json
+      produces: application/json
+      parameters:
+        - name: cmsID
+          in: path
+          type: string
+          required: true
+        - name: privacyPolicy
+          in: formData
+          type: string
+          required: true
+
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+
+  ## FAQ Apis
+  /v1/faq/filterFaq:
+    get:
+      tags:
+        - name: FAQ
+      summary: Get Faqs
+      parameters:
+        - name: searchString
+          in: query
+          type: string
+        - name: page
+          in: query
+          type: string
+        - name: limit
+          in: query
+          type: string
+        - name: limit
+          in: query
+          type: string
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+  /v1/faq/createFaq:
+    post:
+      tags:
+        - name: FAQ
+      summary: Create faq
+      parameters:
+        - name: ques
+          in: formData
+          type: string
+          required: true
+        - name: ans
+          in: formData
+          type: string
+          required: true
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+  /v1/faq/editFaq/{faqID}:
+    patch:
+      tags:
+        - name: FAQ
+      summary: Edit faq
+      parameters:
+        - name: faqID
+          in: path
+          type: string
+          required: true
+        - name: ques
+          in: formData
+          type: string
+        - name: ans
+          in: formData
+          type: string
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+  /v1/faq/deleteFaqById/{faqID}:
+    delete:
+      tags:
+        - name: FAQ
+      summary: Delete FAQ by its id
+      description: APi to delete Faq by id
+      parameters:
+        - name: faqID
+          in: path
+          type: string
+          required: true
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+
+  ## Earning Apis
+  /v1/earning/filterEarning:
+    get:
+      tags:
+        - name: Earning
+      summary: Get All Earning By filter
+      description: APi to get all the Earning by filter
+      parameters:
+        - name: status
+          in: query
+          type: boolean
+        - name: page
+          in: query
+          type: string
+        - name: limit
+          in: query
+          type: string
+        - name: startDate
+          in: query
+          type: string
+        - name: endDate
+          in: query
+          type: string
+        - name: amountFrom
+          in: query
+          type: string
+        - name: amountTo
+          in: query
+          type: string
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+  /v1/earning/getEarningById/{earningID}:
+    get:
+      tags:
+        - name: Earning
+      summary: Get Al Earning By ID
+      description: API to get a Earning by ID
+      parameters:
+        - name: earningID
+          in: path
+          type: string
+          required: true
+
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+
+  /v1/earning/createEarning:
+    post:
+      tags:
+        - name: Earning
+      summary: Create Earing
+      description: Api to Create Earing
+      consumes: application/json
+      produces: application/json
+      parameters:
+        - name: userID
+          in: formData
+          type: string
+          required: true
+        - name: orderID
+          in: formData
+          type: string
+          required: true
+        - name: status
+          in: formData
+          type: boolean
+        - name: amount
+          in: formData
+          type: string
+          required: true
+
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+  /v1/earning/editEarning/{earningID}:
+    patch:
+      tags:
+        - name: Earning
+      summary: Edit the Earing
+      description: Api that will edit the Earing
+      consumes: application/json
+      produces: application/json
+      parameters:
+        - name: earningID
+          in: path
+          type: string
+        - name: status
+          in: formData
+          type: boolean
+        - name: amount
+          in: formData
+          type: string
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+  /v1/earning/deleteEarningById/{earningID}:
+    delete:
+      tags:
+        - name: Earning
+      summary: Delete Earning by its id
+      description: APi to delete earning by id
+      parameters:
+        - name: earningID
+          in: path
+          type: string
+          required: true
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+
+  ## Downloads API
+  /v1/download/add/{userID}/{resourceID}:
+    post:
+      tags:
+        - name: Download
+      summary: Create Resource Download
+      description: Api to Create Resource Download
+      consumes: application/json
+      produces: application/json
+      parameters:
+        - name: userID
+          in: path
+          type: string
+          required: true
+        - name: resourceID
+          in: path
+          type: string
+          required: true
+
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+  /v1/download/all/{userID}:
+    get:
+      tags:
+        - name: Download
+      summary: Get All Download By ID
+      description: API to get a Download by ID
+      parameters:
+        - name: userID
+          in: path
+          type: string
+          required: true
+
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid Credentials
+        404:
+          description: Not Found
+        401:
+          description: Invalid Credentials
+        500:
+          description: Internal Server Error
+
+  # User Course and Topic
+  /v1/userCourse/purchaseCourse/{userID}/{courseID}:
+    post:
+      tags:
+        - name: User Course
+      summary: Purchase a Course
+      description: APi will get all the user courses in the database
+      parameters:
+        - name: userID
+          in: path
+          type: string
+          required: true
+        - name: courseID
+          in: path
+          type: string
+          required: true
+      responses:
+        200:
+          description: OK
+  /v1/userCourse/cancelSubscription:
+    patch:
+      tags:
+        - name: User Course
+      summary: Cancel a purchase course subscription
+      parameters:
+        - name: userID
+          in: query
+          type: string
+          required: true
+        - name: session_id
+          in: query
+          type: string
+          required: true
+        - in: body
+          name: body
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+      responses:
+        200:
+          description: OK
+  /v1/userCourse/refundForSubscription:
+    post:
+      tags:
+        - name: User Course
+      summary: refund for Cancel subscription
+      parameters:
+        - name: userID
+          in: query
+          type: string
+          required: true
+        - name: session_id
+          in: query
+          type: string
+          required: true
+      responses:
+        200:
+          description: OK
+  /v1/userCourse/getAllUserCourses/{userID}:
+    get:
+      tags:
+        - name: User Course
+      summary: Getting all User courses
+      description: APi will get all the user courses in the database
+      parameters:
+        - name: userID
+          in: path
+          type: string
+          required: true
+      responses:
+        200:
+          description: OK
+  /v1/userCourse/courseUserProgresses/{userID}:
+    get:
+      tags:
+        - name: User Course
+      summary: Getting course and progress
+      description: llllllllllllllll
+      parameters:
+        - name: userID
+          in: path
+          type: string
+          required: getAllTopicsByCourse
+      responses:
+        200:
+          description: OK
+  /v1/userCourse/recentCourses/{userID}:
+    get:
+      tags:
+        - name: User Course
+      summary: Getting last 3 visited course
+      description: llllllllllllllll
+      parameters:
+        - name: userID
+          in: path
+          type: string
+          required: getAllTopicsByCourse
+      responses:
+        200:
+          description: OK
+  /v1/userTopic/getAllTopicsByCourse/{userID}/{courseID}:
+    get:
+      tags:
+        - name: User Course
+      summary: Getting all User courses topics
+      description: APi will get all the user courses in the database
+      parameters:
+        - name: userID
+          in: path
+          type: string
+          required: true
+        - name: courseID
+          in: path
+          type: string
+          required: true
+      responses:
+        200:
+          description: OK
+  /v1/userCourse/startCourse/{userID}/{courseID}:
+    post:
+      tags:
+        - name: User Course
+      summary: just call it to get all topics
+      description: APi will get all the user courses in the database
+      parameters:
+        - name: userID
+          in: path
+          type: string
+          required: true
+        - name: courseID
+          in: path
+          type: string
+          required: true
+      responses:
+        200:
+          description: OK
+  /v1/userTopic/startTopic/{userID}/{courseID}/{topicID}:
+    post:
+      tags:
+        - name: User Course
+      summary: Update only percentage
+      description: APi will get all the user courses in the database
+      parameters:
+        - name: userID
+          in: path
+          type: string
+          required: true
+        - name: courseID
+          in: path
+          type: string
+          required: true
+        - name: topicID
+          in: path
+          type: string
+          required: true
+        - name: progress
+          in: body
+          schema:
+            type: object
+            properties:
+              progress:
+                type: number
+      responses:
+        200:
+          description: OK
+
+  /v1/userNote/{userID}:
+    post:
+      tags:
+        - name: User Note
+      summary: Create User Note
+      description: APi will create note for user
+      parameters:
+        - name: userID
+          in: path
+          type: string
+          required: true
+        - name: note
+          in: body
+          schema:
+            type: object
+            properties:
+              note:
+                type: string
+      responses:
+        200:
+          description: OK
+  /v1/userNote/{userID}/{noteID}:
+    get:
+      tags:
+        - name: User Note
+      summary: get single note
+      description: APi will create note for user
+      parameters:
+        - name: userID
+          in: path
+          type: string
+          required: true
+        - name: noteID
+          in: path
+          type: string
+          required: true
+      responses:
+        200:
+          description: OK
+  /v1/userNote/update/{userID}/{noteID}:
+    patch:
+      tags:
+        - name: User Note
+      summary: Update User Note
+      description: APi will create note for user
+      parameters:
+        - name: userID
+          in: path
+          type: string
+          required: true
+        - name: noteID
+          in: path
+          type: string
+          required: true
+        - name: note
+          in: body
+          schema:
+            type: object
+            properties:
+              note:
+                type: string
+      responses:
+        200:
+          description: OK
+  /v1/userNote/delete/{userID}/{noteID}:
+    delete:
+      tags:
+        - name: User Note
+      summary: delete single note
+      description: APi will create note for user
+      parameters:
+        - name: userID
+          in: path
+          type: string
+          required: true
+        - name: noteID
+          in: path
+          type: string
+          required: true
+      responses:
+        200:
+          description: OK
+  /v1/userNote/all/{userID}/:
+    get:
+      tags:
+        - name: User Note
+      summary: delete single note
+      description: APi will create note for user
+      parameters:
+        - name: userID
+          in: path
+          type: string
+          required: true
+      responses:
+        200:
+          description: OK
+  /v1/timeline/{userID}/:
+    get:
+      tags:
+        - name: Timeline
+      summary: Timeline of a user
+      parameters:
+        - name: userID
+          in: path
+          type: string
+          required: true
+        - name: date
+          in: query
+          type: string
+          required: true
+          example: yyyy-mm-dd
+      responses:
+        200:
+          description: OK
+  /v1/cart/add:
+    post:
+      tags:
+        - Cart
+      summary: course add to cart
+      parameters:
+        - in: body
+          name: cart
+          schema:
+            type: object
+            properties:
+              userID:
+                type: string
+              courseID:
+                type: string
+      responses:
+        200:
+          description: OK
+  /v1/cart/remove:
+    patch:
+      tags:
+        - Cart
+      summary: course remove from cart
+      parameters:
+        - in: body
+          name: cart
+          schema:
+            type: object
+            properties:
+              userID:
+                type: string
+              courseID:
+                type: string
+      responses:
+        200:
+          description: OK
+  /v1/cart/all/{userID}:
+    get:
+      tags:
+        - Cart
+      summary: get users cart
+      parameters:
+        - in: path
+          name: userID
+          type: string
+          required: true
+      responses:
+        200:
+          description: OK
+
+  /v1/userTimeline/add:
+    post:
+      tags:
+        - timeline
+      summary: add
+      parameters:
+        - in: body
+          name: cart
+          required: true
+          schema:
+            type: object
+            properties:
+              userID:
+                type: string
+              allday:
+                type: boolean
+              title:
+                type: string
+              description:
+                type: string
+              start:
+                type: string
+                format: date
+                description: event start date
+                example: "2021-01-30"
+              end:
+                type: string
+                format: date
+                description: end
+                example: "2021-01-30"
+              textColor:
+                type: string
+      responses:
+        200:
+          description: OK
+
+  /v1/userTimeline/deleteUserTimeline/{timeLineId}:
+    delete:
+      tags:
+        - timeline
+      summary: delete
+      parameters:
+        - in: path
+          name: timelineId
+          type: string
+          required: true
+      responses:
+        200:
+          description: OK
+
+  /v1/userTimeline/{userID}/:
+    get:
+      tags:
+        - timeline
+      summary: Timeline of a user
+      parameters:
+        - in: path
+          name: userID
+          type: string
+          required: true
+        - in: query
+          name: date
+          type: string
+          required: true
+          example: yyyy-mm-dd
+      responses:
+        200:
+          description: OK
+
+  /v1/userTimeline/all/{userID}/:
+    get:
+      tags:
+        - timeline
+      summary: Timeline of a user
+      parameters:
+        - in: path
+          name: userID
+          type: string
+          required: true
+      responses:
+        200:
+          description: OK
